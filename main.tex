@@ -1,0 +1,229 @@
+\documentclass[a4paper,10pt]{article}
+
+%------------------------------------------------------------
+% 1) PACKAGES & BASIC SETUP
+%------------------------------------------------------------
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontspec}  % must compile with lualatex or xelatex
+
+\hypersetup{ 
+  colorlinks = true,
+  urlcolor = headingGray,
+  linkcolor = headingGray
+}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\linespread{1.15}
+
+%------------------------------------------------------------
+% 2) SET MAIN FONT TO RUBIK (REGULAR, BOLD, ITALIC)
+%    This ensures \textbf, \textit, etc. all work.
+%------------------------------------------------------------
+\setmainfont{Rubik-Regular.ttf}[
+  Path           = fonts/,
+  BoldFont       = Rubik-SemiBold.ttf,
+  ItalicFont     = Rubik-LightItalic.ttf,
+  BoldItalicFont = Rubik-SemiBoldItalic.ttf
+]
+
+%------------------------------------------------------------
+% 3) DEFINE A "HEADING" FONT (MEDIUM WEIGHT)
+%------------------------------------------------------------
+\newfontface\RubikHeading{Rubik-Regular.ttf}[
+  Path         = fonts/,
+  % If you also have a medium italic file, you can specify it:
+  ItalicFont   = Rubik-Italic.ttf
+]
+
+%------------------------------------------------------------
+% 4) COLORS & SECTION FORMATTING
+%------------------------------------------------------------
+\definecolor{headingGray}{HTML}{65696D} % e.g. for headings
+\definecolor{textDark}{HTML}{0F0F0F}    % main text color
+\definecolor{text}{HTML}{384347}
+% Make \section headings use Rubik-Medium, 11 pt
+\titleformat{\section}{
+   \RubikHeading % weight=500
+   \fontsize{14}{16}\selectfont
+   \color{headingGray}
+   \uppercase
+}{}{0pt}{}[]
+
+\titlespacing{\section}{0pt}{0.8em}{0.4em}
+
+\setlist[itemize]{
+  leftmargin=1.2em,
+  itemsep=3pt,
+  topsep=3pt,
+  itemindent=0em,
+  labelsep=0.5em,
+}
+
+%------------------------------------------------------------
+% 5) CUSTOM COMMANDS
+%------------------------------------------------------------
+% Large bold name
+\newcommand{\name}[1]{%
+  {\fontsize{22}{24}\bfseries\selectfont #1}
+}
+
+% A “medium-weight + 12 pt” style for job titles
+\newcommand{\jobtitlestyle}{%
+  \RubikHeading  % Rubik-Medium
+  \fontsize{12}{14}\selectfont
+  \color{textDark}
+}
+
+% Single job title
+\newcommand{\jobtitle}[1]{%
+  {\jobtitlestyle #1}
+}
+
+\newcommand{\datestyle}{%
+  \fontsize{10}{12}\selectfont 
+  \color{headingGray}
+}
+
+
+% Contact info in smaller text
+\newcommand{\contactinfo}[1]{\normalsize  #1}
+
+% Title + date line in the same style
+\newcommand{\jobtitledate}[2]{%
+  {\jobtitlestyle #1}\hfill {\datestyle #2}\par
+}
+
+% Company + location line
+\newcommand{\companyplace}[2]{%
+  {\jobtitlestyle #1}\hfill {\datestyle #2}\par
+}
+
+% Company description in normalsize  text
+\newcommand{\companydescription}[1]{%
+  \normalsize  #1\par
+}
+\color{text}
+%============================================================
+\begin{document}
+
+%============================================================
+% HEADER (Name / Title / Contact info)
+%============================================================
+{\name{Erwan Leboucher}\par}
+{\jobtitle{Senior Software Engineer}\par}
+Paris, France
+
+\vspace{0.4em}
+{\contactinfo{%
+  \href{tel:+33678413420}{+33678413420} \quad
+  \href{mailto:erwanleboucher@gmail.com}{erwanleboucher@gmail.com} \quad
+  \href{https://linkedin.com/in/erwan-leboucher}{linkedin.com/in/erwan-leboucher} \quad
+  \href{https://github.com/eleboucher}{github.com/eleboucher}
+}}
+
+%============================================================
+% SUMMARY
+%============================================================
+\vspace{0.4em}
+Backend-focused Senior Software Engineer with 7+ years of experience building scalable systems. Specialized in Golang and Python with proven success optimizing high-volume applications processing 500M+ daily records. Experienced in cloud architecture (AWS, Kubernetes) with a track record of reducing response times and operational costs while improving reliability.
+
+%============================================================
+% EXPERIENCE
+%============================================================
+\section*{Experience}
+
+\jobtitledate{Senior Software Engineer}{Paris}
+\companyplace{Blablacar}{07/2025 -- Present}
+\begin{itemize}
+    \item Diagnosed and resolved critical bottlenecks across the service mesh (e.g., logging overhead), reducing global p95 latency by ~34\% (259ms to 171ms).
+    \item  Led the migration of legacy services to FastAPI, successfully cutting endpoint latency by 50\%+ (p95: 280ms to 111ms) while significantly lowering CPU/Memory resource consumption.
+    \item Re-engineered the bulk user import system for B2G partners, optimizing the parsing engine to increase upload capacity by 100x (1k to 100k users) with sub-10s execution time.
+    \item Spearheaded the critical refactoring of the B2B/B2G vertical to enable dual user affiliation and "Automatching" workflows. Structured business data models in dbt and BigQuery to drive partner analytics
+    \item Refactored the core Matching API (high-throughput business logic), achieving a 15\% reduction in p99 latency (stabilizing from ~140ms to ~115ms) to directly improve real-time ride availability.
+
+\end{itemize}
+\textbf{Technologies}:  \textit{Python, FastAPI, Flask, Kafka, React, Kubernetes, PostgreSQL, GCP, Playwright}
+
+\jobtitledate{Senior Software Engineer}{Paris}
+\companyplace{Goodvest}{Freelance | 12/2024 -- 03/2025}
+\companydescription{%
+Goodvest is an investment platform focusing on sustainable and ethical investment options.
+}
+\begin{itemize}
+    \item Implemented comprehensive monitoring and alerting system using OpenTelemetry, leading to 50\% reduction in API response times through data-driven optimizations and proper database indexing
+    \item Led Kubernetes infrastructure planning and initial implementation to improve system scalability and reliability
+    \item Engineered real-time user tracking solution integrating Segment and PostHog across frontend and backend systems, enabling data-driven product decisions
+    \item Established end-to-end testing framework using Playwright, significantly improving application stability and reducing regression bugs
+\end{itemize}
+\textbf{Technologies}:  \textit{Python, Django, Vue.js, Kubernetes, PostgreSQL, GitLab CI/CD, AWS, Segment, PostHog, Playwright, OpenTelemetry, Prometheus}
+
+\vspace{1.2em}
+
+\jobtitledate{Senior Software Engineer}{Berlin/Paris}
+\companyplace{Wolt}{10/2021 -- 11/2024}
+\companydescription{%
+Wolt is a food delivery application operating in 29 countries, with more than 140,000 restaurants 
+and more than 45 million users.
+}
+\begin{itemize}
+    \item Led architecture and development of a high-performance audience builder tool (Golang backend, React frontend) used by 320+ marketing managers for creation and export of targeted audiences to third-party ad networks 
+    \item Optimized near real-time data pipeline processing 500M+ rows daily; designed event-driven architecture with Kafka streams to distribute audience data to DynamoDB, PostgreSQL and third-party integrations, achieving 30x faster speeds, 67\% cost reduction, and 100x scalability
+    \item Integrated DynamoDB for sub-10ms query responses in the audience builder, enabling fast audience filtering and providing real-time eligibility checks for the ordering system's promotion feature
+    \item Developed data visualization dashboards with Python (FastAPI) providing insights into audience segments and marketing campaign performance
+    \item Directly managed project requirements and roadmap with marketing stakeholders, while coordinating integrations with multiple engineering teams to ensure seamless data flow between systems, resulting in more effective targeted campaigns
+\end{itemize}
+\textbf{Technologies}:  \textit{Golang, Python (FastAPI, Airflow), React, PostgreSQL, Snowflake, DynamoDB, S3, Kubernetes, Kafka, OpenTelemetry}
+
+\vspace{1.2em}
+
+\jobtitledate{Software Engineer}{Berlin}
+\companyplace{viafintech}{09/2019 -- 10/2021}
+\companydescription{%
+viafintech is a payment service provider. Through viacash, they offer a solution for cash deposits, withdrawals and payments for clients like N26, bunq, Amazon.de in retails such as DM, Rewe, Penny.
+}
+\begin{itemize}
+    \item Integrated multiple external transaction APIs (Alipay, Incomm gift cards) using Golang
+    \item Designed and developed an iOS and Android application to find the nearest retail partners with React Native and Typescript
+    \item Engineered a new deployment system written in Golang, affecting 60+ services. Integrated using Golang and Bash with Docker, GitLab, AWS S3 and Vault. Reducing the deployment time by 95\%.
+    \item Mentored new team members, accelerating their onboarding process and bringing them up to speed on project specifics, codebases, and best practices.
+\end{itemize}
+\textbf{Technologies}: \textit{Golang, React / React Native, PostgreSQL, RabbitMQ}
+
+\vspace{1.2em}
+
+\jobtitledate{Full-Stack Developer}{Paris}
+\companyplace{GitGuardian}{Freelance | 11/2018 -- 07/2019}
+\textbf{Technologies}:  \textit{Django, Python, React, PostgreSQL, Golang}
+\begin{itemize}
+    \item Developed a B2B security dashboard used by Fortune 500 clients using Django and React.
+    \item Redesigned the main website using Gatsby and Node.js serverless functions, scaling to support 50k+ monthly engineer visits.
+\end{itemize}
+%============================================================
+% EDUCATION
+%============================================================
+\section*{Education}
+\jobtitledate{Computer Science}{Paris}
+\companyplace{École 42}{2019}
+
+
+%============================================================
+% SKILLS
+%============================================================
+\section*{Skills}
+\textbf{Programming Languages}: Golang, Python, Typescript, Javascript, Java \\
+\textbf{Frontend}: React, Vue, React Native \\
+\textbf{Data \& Infrastructure}: PostgreSQL, Kafka, DynamoDB, Redis, S3, Snowflake \\
+\textbf{Observability}: Datadog, Prometheus, Sentry, OpenTelemetry \\
+\textbf{Cloud \& DevOps}: Docker, AWS, GitLab CI/CD, GitHub Actions, Kubernetes
+
+%============================================================
+% LANGUAGES
+%============================================================
+\section*{Languages}
+\textbf{English} (Fluent)\quad \textbf{French} (Native)
+
+\end{document}
